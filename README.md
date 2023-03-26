@@ -5,3 +5,5 @@
 <p>Focus will shift as you type single digit.</p>
 <p>Focus will shift backwards when you delete each digit.</p>
 <p>Checks only positive numbers.</p>
+<p>Take only single digit.</p>
+<p>Checks <strong>123456</strong> as correct OTP.</p>

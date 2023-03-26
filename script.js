@@ -8,6 +8,22 @@ window.onload = function() {
 }
 
 otpInput.forEach((el, index) => {
+    // Listen for the "input" event on the input element
+    el.addEventListener("input", () => {
+        // Get the input value
+        let value = el.value;
+    
+        // Remove any non-numeric characters
+        value = value.replace(/[^0-9]/g, "1");
+    
+        // Limit the input to a single digit
+        if (value.length > 1) {
+        value = value.slice(0, 1);
+        }
+    
+        // Set the input value
+        el.value = value;
+    });
     el.addEventListener('keyup', () => {
         // To shift focus to the next input when the single digit is entered to the current one.
         if(el.value.length >= 1) {
@@ -20,6 +36,7 @@ otpInput.forEach((el, index) => {
     })
 })
 
+
 // To get each input value into the one string and then check with the correct OTP.
 const form = document.getElementsByTagName('form')[0];
 let fullOtp = [];
@@ -29,17 +46,13 @@ form.addEventListener('submit', (e) => {
     for (const pair of formData.entries()) { // And then we call formData.entries to get an array of form data key-pair pairs.
         fullOtp.push(pair[1]);
     }
-    // console.log(fullOtp.toString()); Converts array items to a string but with comma.
     let a = fullOtp.join(''); // To get entered OTP as a single string.
-    const regex = /^[0-9]{6}$/;
-    if (a == "123456" && regex.test(a)) {
+    if (a == "123456") {
         document.getElementsByTagName('body')[0].innerText = "Entered OTP is correct.";
     }
     else {
         alert("Entered OTP is incorrect. Please retry.");
         form.reset();
         otpInput[0].focus();
-        return false;
     }
-    console.log(a);
 })

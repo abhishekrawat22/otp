@@ -18,7 +18,7 @@ otpInput.forEach((el, index) => {
     
         // Limit the input to a single digit
         if (value.length > 1) {
-        value = value.slice(0, 1);
+            value = value.slice(0, 1);
         }
     
         // Set the input value
@@ -56,8 +56,14 @@ form.addEventListener('submit', (e) => {
         attempts++;
         if (attempts < 3) {
             alert(`Entered OTP is incorrect. You have ${3 - attempts} attempts left. Please retry.`);
-            form.reset();
-            otpInput[0].focus();
+            // form.reset();
+            // otpInput[0].focus();
+            for(let i = 0; i < otpInput.length - 1; i++) {
+                if(otpInput[i].value == "") {
+                    otpInput[i].focus();
+                    break;
+                }
+            }
             fullOtp = [];
         } else {
             alert("You have exceeded the maximum number of attempts. Please try again later.");

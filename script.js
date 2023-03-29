@@ -1,26 +1,17 @@
 let otpInput = document.querySelectorAll("[name=otp]"); // Get all the inputs.
 let verifyOtpBtn = document.getElementsByTagName('button')[0]; // Get verify button.
 
-// Reset form when page refreshes.
-window.onload = function() {
-    form.reset();
-    otpInput[0].focus();
-}
-
 otpInput.forEach((el, index) => {
     // Listen for the "input" event on the input element
     el.addEventListener("input", () => {
         // Get the input value
-        let value = el.value;
-    
+        let value = el.value;    
         // Remove any non-numeric characters
-        value = value.replace(/[^0-9]/g, "");
-    
+        value = value.replace(/[^0-9]/g, "");    
         // Limit the input to a single digit
         if (value.length > 1) {
             value = value.slice(0, 1);
         }
-    
         // Set the input value
         el.value = value;
     });
@@ -36,9 +27,32 @@ otpInput.forEach((el, index) => {
     })
 })
 
+// To paste OTP from clipboard.
+const pasteBtn = document.querySelector('#paste-btn');
+pasteBtn.addEventListener('click', () => {
+    const clipboardData = navigator.clipboard.readText();
+    clipboardData.then((clipboardText) => {
+        const digits = clipboardText.match(/\d+/g);
+        if (digits && digits.length > 0) {
+            otpInput.forEach((el, index) => {
+                if (index < digits.length) {
+                    el.value = digits[index];
+                } else {
+                    el.value = '';
+                }
+                otpInput[index + 1]?.focus();
+            })
+        }
+    })
+});
 
 // To get each input value into the one string and then check with the correct OTP.
 const form = document.getElementsByTagName('form')[0];
+// Reset form when page refreshes.
+window.onload = function() {
+    form.reset();
+    otpInput[0].focus();
+}
 let fullOtp = [];
 let correctOtp = "123456";
 let attempts = 0;
@@ -56,8 +70,6 @@ form.addEventListener('submit', (e) => {
         attempts++;
         if (attempts < 3) {
             alert(`Entered OTP is incorrect. You have ${3 - attempts} attempts left. Please retry.`);
-            // form.reset();
-            // otpInput[0].focus();
             for(let i = 0; i < otpInput.length - 1; i++) {
                 if(otpInput[i].value == "") {
                     otpInput[i].focus();

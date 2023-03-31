@@ -101,6 +101,10 @@ button:focus-within {
 button:active {
     transform: translateY(3px);
 }
+.disabled {
+    opacity: 0.50;
+    pointer-events: none;
+}
 
 @media screen and (min-width: 640px) {
     html {

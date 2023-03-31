@@ -15,36 +15,19 @@ otpInput.forEach((el, index) => {
         // Set the input value
         el.value = value;
     });
-    el.addEventListener('keyup', () => {
+    el.addEventListener('keyup', (event) => {
         // To shift focus to the next input when the single digit is entered to the current one.
+        const key = event.key;
         if(el.value.length >= 1) {
             otpInput[index + 1]?.focus();
         }
         // To go to the previous input when current's value is cleared.
-        else if(el.value == '') {
+        else if(el.value == '' && key === "Backspace") {
+            verifyOtpBtn.classList.add("disabled")
             otpInput[index - 1]?.focus();
         }
     })
 })
-
-// To paste OTP from clipboard.
-const pasteBtn = document.querySelector('#paste-btn');
-pasteBtn.addEventListener('click', () => {
-    const clipboardData = navigator.clipboard.readText();
-    clipboardData.then((clipboardText) => {
-        const digits = clipboardText.match(/\d+/g);
-        if (digits && digits.length > 0) {
-            otpInput.forEach((el, index) => {
-                if (index < digits.length) {
-                    el.value = digits[index];
-                } else {
-                    el.value = '';
-                }
-                otpInput[index + 1]?.focus();
-            })
-        }
-    })
-});
 
 // To get each input value into the one string and then check with the correct OTP.
 const form = document.getElementsByTagName('form')[0];

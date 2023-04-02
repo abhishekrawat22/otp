@@ -23,8 +23,13 @@ otpInput.forEach((el, index) => {
         }
         // To go to the previous input when current's value is cleared.
         else if(el.value == '' && key === "Backspace") {
-            verifyOtpBtn.classList.add("disabled")
+            verifyOtpBtn.classList.add("disabled");
             otpInput[index - 1]?.focus();
+        }
+        // To keep button disabled till all the fields are filled.
+        let validInputs = Array.from(otpInput).filter( input => input.value !== "");
+        if(validInputs.length == 6) {
+            verifyOtpBtn.classList.remove("disabled");
         }
     })
 })

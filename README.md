@@ -8,3 +8,4 @@
 <p>Each input takes only single digit.</p>
 <p>Checks <strong>123456</strong> as the correct OTP.</p>
 <p>User gets only 3 attempts to enter correct OTP, otherwise page refreshes.
+<p>The Verify button remains disabled till all input fields are filled.</p>

@@ -19,7 +19,7 @@ body {
     box-shadow: 5px 7px 15px 0px rgba(0, 0, 0, 0.2);
     padding: 2rem;
     text-align: center;
-    max-width: 26rem;
+    max-width: 29rem;
 }
 h1 {
     font-size: 2rem;
@@ -51,7 +51,7 @@ input {
     font-size: 1rem;
     font-weight: 700;
     text-align: center;
-    width: 30px;
+    width: 45px;
     font-family: inherit;
 }
 input:focus,

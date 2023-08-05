@@ -62,7 +62,7 @@ otpInput.forEach((el, index) => {
     })
 })
 
-// To pastae OTP using keyboard keys.
+// To paste OTP using keyboard keys.
 otpInput[0].addEventListener("keydown", function (ev) {
 
     // function to check the detection
@@ -99,6 +99,9 @@ form.addEventListener('submit', (e) => {
     let a = fullOtp.join(''); // To get entered OTP as a single string.
     if (a == correctOtp) {
         document.getElementsByTagName('body')[0].innerText = "Entered OTP is correct.";
+    }
+    else if (a == '') {
+      alert('Please enter OTP first.');
     }
     else {
         attempts++;
